@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Powershades RF Gateway</title>
+		<link
+			href="https://powershades-gateway-webserver.s3-us-west-2.amazonaws.com/mini-dark.min.css"
+			rel="stylesheet"
+			type="text/css">
+	</head>
+
+	<body>
+		<div>
+			
+			<header class="sticky" style="height:5em">
+					<div class="col-sm-4 col-md-2">
+							<a href="/index.shtml" class="logo">
+								<img
+									src="https://powershades-gateway-webserver.s3-us-west-2.amazonaws.com/PowerShades.png" alt="Powershades"
+								/>
+							</a>
+						<a href="/network.shtml" class="button" style="font-size:1.0em;">Network</a>
+						<a href="/device.shtml" class="button" style="font-size:1.0em;">Device</a>
+						
+					</div>
+			</header>
+
+			<div class="main-container container">
+				<div class="row">
+					<div id="main-contents-wrapper">
+						<br>
+						<h2>Device Configuration</h2>
+						<form method="get">
+							
+						<div class="row responsive-label">
+								<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+									<label for="sernum">Serial Number:</label>
+								</div>
+								<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;">
+									<input readonly type="text" id="sernum" name="sernum" value="<!--#sernum-->">
+								</div>
+								
+								<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+									<label>Device Name:</label>
+								</div>
+								<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;">
+									<input readonly type="text" value="<!--#devname-->">
+								</div>
+
+							</div>
+
+							<br>
+							<p>This device is running firmware version <span id="version"></span>(<span
+									id="curfwpg"></span>)<br />
+
+								<!--
+								<span id="myButtons">
+									<label>
+										<a class="button secondary" style="background-color: #8dc63f;">Local Update</a>
+										<input type="file" accept=".bin" onchange="localFileChanged(this)" style="position: fixed; top: -100em;">
+									</label>
+								</span>
+								-->
+								<div id="progDiv" style="display:none">
+									<div style="text-align:center">
+										<div class="spinner secondary" style="--spinner-fore-color: #8dc63f"></div>
+									</div>
+									<div id="progText" style="text-align:center">&nbsp;</div>
+									<progress id="progBar" class="secondary" value="20" max="1000" style="--progress-fore-color: #8dc63f"></progress>
+								</div>
+							</form>
+
+							<br>
+
+							<form>
+								<fieldset>
+									<div class="row responsive-label">
+										<div class="col-sm-12 col-md-8" style="align-self: center; text-align:
+											left;">
+											<h4>Status</h4>
+										</div>
+									</div>
+									
+									
+									<div class="row responsive-label">
+										<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+											<label for="netsts">Network Status:</label>
+										</div>
+										<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;">
+											<input readonly type="text" id="netsts" name="netsts">
+										</div>
+									</div>
+									<div class="row responsive-label">
+										<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+											<label for="rfsts">RF Status:</label>
+										</div>
+										<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;">
+											<input readonly type="text" id="rfsts" name="rfsts">
+										</div>
+									</div>
+									<div class="row responsive-label">
+										<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+											<label for="rfsts">Current RSSI:</label>
+										</div>
+										<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;">
+											<input readonly type="text" id="rssi" name="rssi">
+										</div>
+									</div>
+								</fieldset>
+							</form>
+							<br>
+							<form>
+							<fieldset> 
+								<div class="row responsive-label">
+									<div class="col-sm-12 col-md-8" style="align-self: center; text-align:left;">
+										<h4>Commands</h4>
+									</div>
+								</div>
+								<br>
+								
+								<div class="row responsive-label">
+									<div class="col-sm-12 col-md-3 input-group">
+										<div class="row responsive-label">
+											<br>
+											<br>
+											<label style="align-self:center" for="ch">Channel:</label>
+											<div class="col-sm-6 col-md-8 input-group" style="align-self:center;">
+												<select style="width:100%; align-self: right" id="ch" name="ch">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+													<option value="13">13</option>
+													<option value="14">14</option>
+													<option value="15">15</option>
+													<option value="16">16</option>
+													<option value="17">17</option>
+													<option value="18">18</option>
+													<option value="19">19</option>
+													<option value="20">20</option>
+													<option value="21">21</option>
+													<option value="22">22</option>
+													<option value="23">23</option>
+													<option value="24">24</option>
+													<option value="25">25</option>
+													<option value="26">26</option>
+													<option value="27">27</option>
+													<option value="28">28</option>
+													<option value="29">29</option>
+													<option value="30">30</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-1"></div>
+									
+									<div class="col-sm-12 col-md-3 row justify-content-center";>
+										<br>
+										<input class="col-sm-12 col-md-12 button secondary" readonly value="Pair" name="pair" onclick="commandPair()" style="background-color:#8dc63f;">
+										<br>
+										<input class="col-sm-12 col-md-12 button secondary" readonly value="Link Feedback" name="link" onclick="commandLink()"  style="background-color: #8dc63f;">
+										<br>
+										<input class="col-sm-12 col-md-12 button secondary" readonly value="P2" name="p2" onclick="commandP2()"  style="background-color: #8dc63f;">
+										<br>
+									</div>
+								    <div class="col-sm-12 col-md-1"></div>
+									<div class="col-sm-12 col-md-3 row justify-content-center">
+										<br>
+										<input class="col-sm-12 col-md-12 button secondary" readonly value="Up" name="up" onclick="commandUp()"  style="background-color: #8dc63f;">
+										<br>
+										<input class="col-sm-12 col-md-12 button secondary" readonly value="Stop" name="stop" onclick="commandStop()"  style="background-color: #8dc63f;">
+										<br>
+										<input class="col-sm-12 col-md-12 button secondary" readonly value="Down" name="down" onclick="commandDown()"  style="background-color: #8dc63f;">	
+										<br>
+									</div>
+
+								</div>
+							</fieldset>
+						</form>
+
+						<br>
+						<form>
+							<fieldset>
+								<div class="row responsive-label responsive-margin responsive-padding">
+									<div class="col-sm-12 col-md-8" style="align-self: center; text-align:left;">
+										<h4>RF Channel Information</h4>
+									</div>
+								</div>
+								<br>
+								<table id="rfdevstable" class="striped" style="display:table; width:100%;">
+									  <col style="width: fit-content;">
+									  <col style="width: fit-content;">
+									  <col style="width: fit-content;">
+									  <col style="width: fit-content;">
+									  <col style="width: fit-content;">
+									  <col style="width: fit-content;">
+									  <col style="width: fit-content;">
+									<thead>
+										<tr class="flexbox">
+										<th>Channel</th>
+										<th>Device ID</th>
+										<th>Battery (Volts)</th>
+										<th>Percent</th>
+										<th>Rx Level (dB)</th>
+										<th>Name</th>
+										<th>Firmware</th>
+										</tr>
+									</thead>
+									
+									<tbody style="padding: 1px">
+									</tbody>
+								</table>
+
+							</fieldset>
+						</form>
+						
+						<!-- <br>
+						<form>
+							<fieldset>
+								<div class="row responsive-label responsive-margin responsive-padding">
+
+									<div class="col-sm-6 col-md-6" style="align-self: center; text-align:left;">
+										<h4>RF Remote Information</h4>
+									</div>
+									<div class="col-sm-6 col-md-6 input-group">
+										<label>Choose Type and Click Pair Remote</label>
+										<select style="width:50%; align-self: right" id="selectremotetype" name="ch">
+											<option value="4">PS RF Remote</option>
+											<option value="6">PS Wind Sensor</option>
+											<option value="7">RA Wind Sensor</option>
+										</select>
+										<input class="button secondary" readonly value="Pair Remote" name="pairremote"
+											onClick="commandPairRemote()" style="background-color: #8dc63f;">
+									</div>
+								</div>
+								<br>
+								<table id="remotestable" class="striped" style="display:table; width:100%;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<thead>
+										<tr class="flexbox">
+											<th>Index</th>
+											<th>Name</th>
+											<th>Device Host RFID</th>
+											<th>Model</th>
+											<th>Type</th>
+										</tr>
+									</thead>
+						
+									<tbody style="padding: 1px">
+									</tbody>
+								</table>
+							</fieldset>
+						</form>
+						
+						<br>
+						
+						<form>
+							<fieldset>
+								<div class="row responsive-label responsive-margin responsive-padding">
+									<div class="col-sm-12 col-md-8" style="align-self: center; text-align:left;">
+										<h4>RF Remote Actions</h4>
+										<p>End Point Type: 0 = Not Set 1 = RF Channel, 2 = RF Group, 3 = PoE Motor IP</p>
+										<p>If RF Channel, End Point Data should be the channel number</p>
+										<p>If RF Group, End Point Data should be the channel mask value</p>
+										<p>If PoE Motor, End Point Data should be the ip address</p>
+									</div>
+								</div>
+								<br>
+								<table id="remoteactionstable" class="striped" style="display:table; width:100%;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<col style="width: fit-content;">
+									<thead>
+										<tr class="flexbox">
+											<th>Index</th>
+											<th>Name</th>
+											<th>Source RFID</th>
+											<th>Channel</th>
+											<th>Action Type</th>
+											<th>Action Data</th>
+										</tr>
+									</thead>
+									<tbody style="padding: 1px">
+									</tbody>
+								</table>
+						
+								<div class="col-sm-12 input-group">
+									<input class="col-sm-6 button secondary" readonly value="Add" name="addremoteaction" onClick="addAction()"
+										style="background-color: #8dc63f;">
+								</div>
+						
+							</fieldset>
+						</form> -->
+<!--
+						<span id="myButtons2">
+							<a id="pairButton" class="button secondary" onclick="commandPair()">Pair Button</a>
+						</span>
+-->
+						<br>
+
+						<form method="post" action="/device.xml">
+							<fieldset>
+								<div class="row responsive-label">
+									<h4>Actions</h4>
+									<div id="reboot-button-holder" class="col-sm-12 input-group">
+										<input class="col-sm-6 button secondary" value="Reboot" name="reboot" type="submit"	style="background-color: #8dc63f;">
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<a href="/debug.shtml" style="font-size:0.5em;">Debug</a>
+<!--
+		<label for="modal-control">Show modal</label>
+
+
+<input type="checkbox" id="modal-control" class="modal">
+<div>
+  <div class="card">
+    <label for="modal-control" class="modal-close" ></label>
+    <h3 class="section">Modal</h3>
+    <p class="section">This is a modal dialog!</p>
+	<form>
+		<div>
+			<label>DATA</label>
+			<input></input>
+		</div>
+	</form>
+  </div>
+</div>
+-->
+		<script src="lib.js"></script>
+		<script>
+				
+				populateRfDevicesTable();
+				//populateRemotesTable();
+				
+				async function startupDevices() { 
+		
+					refreshVariable(["battery"], 30040, "");
+					//await delay(1000);	
+					refreshVariable(["chnames1"],30050,"");
+					//await delay(1000);
+					refreshVariable(["chnames2"],30060,"");
+					//await delay(1000);
+					refreshVariable(["chnames3"],30070,"");
+					//await delay(1000);
+					refreshVariable(["version", "curfwpg"],30800,"");
+					//await delay(1000);
+					refreshVariable(["netsts","rfsts","rssi"], 2010,""); 
+					//await delay(1000);
+					refreshVariable(["percent","rx"], 5020, "");
+					//await delay(1000);
+					refreshVariable(["rfdevs"], 10030, ""); // RFIDs of devices
+					//await delay(1000);
+					//refreshVariable(["remotes"], 10050, ""); // RFIDs of devices
+
+					refreshVariable(["dev_fw"], 15000, ""); // RFIDs of devices
+				}
+				startupDevices();
+			</script>
+	</body>
+
+</html>

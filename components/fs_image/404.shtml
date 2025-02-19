@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Powershades</title>
+		<link href="https://powershades-gateway-webserver.s3-us-west-2.amazonaws.com/mini-dark.min.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+        <header class="sticky" style="height:5em">
+            <div class="col-sm-4 col-md-2">
+                    <a href="/index.shtml" class="logo">
+                        <img
+                            src="https://powershades-gateway-webserver.s3-us-west-2.amazonaws.com/PowerShades.png" alt="Powershades"
+                        />
+                    </a>
+                <a href="/network.shtml" class="button" style="font-size:1.0em;">Network</a>
+                <a href="/device.shtml" class="button" style="font-size:1.0em;">Device</a>
+            </div>
+    </header>
+
+        <div id="main">
+            <div class="fof">
+                    <h1>Error 404</h1>
+            </div>
+        </div>
+    </body>
+</html>

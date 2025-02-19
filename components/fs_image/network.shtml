@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Powershades RF Gateway</title>
+		<link href="https://powershades-gateway-webserver.s3-us-west-2.amazonaws.com/mini-dark.min.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div>
+
+		<header class="sticky" style="height:5em">
+				<div class="col-sm-4 col-md-2">
+						<a href="/index.shtml" class="logo">
+							<img
+								src="https://powershades-gateway-webserver.s3-us-west-2.amazonaws.com/PowerShades.png" alt="Powershades"
+							/>
+						</a>
+					<a href="/network.shtml" class="button" style="font-size:1.0em;">Network</a>
+					<a href="/device.shtml" class="button" style="font-size:1.0em;">Device</a>
+				</div>
+		</header>
+	
+
+		<div class="main-container container">
+			<div class="row">
+			<div id="main-contents-wrapper">	
+				<br>
+				<h2>Network Information</h2>
+				<form method="get">
+					<div class="row responsive-label">
+						<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+							<b>Host Name:</b>
+						</div>
+						<div class="col-sm-12 col-md-8 fluid"><!--#hostnm--></div>
+					</div>
+
+					<br>
+					<div class="row responsive-label">
+						<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+							<b>MAC Address:</b>
+						</div>
+						<div class="col-sm-12 col-md-8 fluid"><!--#macaddr--></div>
+					</div>
+
+					<br>
+					<div class="row responsive-label">
+						<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+							<b>IP Address:</b>
+						</div>
+						<div class="col-sm-12 col-md-8 fluid"><!--#curip--></div>
+					</div>
+					<br>
+					<div class="row responsive-label">
+							<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+								<b>Subnet:</b>
+							</div>
+							<div class="col-sm-12 col-md-8 fluid"><!--#cursn--></div>
+					</div>
+					<br>
+					<div class="row responsive-label">
+							<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+								<b>Gateway:</b>
+							</div>
+							<div class="col-sm-12 col-md-8 fluid"><!--#curgw--></div>
+					</div>
+					<br>
+					<div class="row responsive-label">
+							<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+								<b>Primary DNS:</b>
+							</div>
+							<div class="col-sm-12 col-md-8 fluid"><!--#curpdns--></div>
+					</div>
+					<br>
+					<div class="row responsive-label">
+							<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+								<b>Secondary DNS:</b>
+							</div>
+							<div class="col-sm-12 col-md-8 fluid"><!--#cursdns--></div>
+					</div>
+				</form>
+				
+				<br><br>
+			
+				<h2>Ethernet Settings</h2>
+
+				<form method="post" action="/save_network.xml">
+					<fieldset>
+
+						<div class="row responsive-label">	
+									<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+										<input type="radio" name="dhcp" value="1" <!--#dhcpon-->>
+									</div>
+
+									<div class="col-sm-12 col-md-8 input-group" style="align-self: left; text-align: left;">
+										<label for="dhcp" style="padding-left:0;">Determine network settings automatically with DHCP</label>
+									</div> 
+						</div>
+						<br>
+						<br>
+						<div class="row responsive-label">
+							<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><input type="radio" name="dhcp" value="0" <!--#dhcpoff-->></div>
+							<div class="col-sm-12 col-md-8 input-group" style="align-self: left; text-align: left;"><label for="dhcp" style="padding-left:0;">Use the following network settings:</label></div>
+						</div>
+						<br>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="ip">IP address:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input id="ip" name="ip" type="text" value= "<!--#netip-->" ></div></div>	
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="sn">Subnet:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input type="text" id="sn" name="sn" value= "<!--#netsn-->" ></div></div>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="gw">Gateway:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input type="text" id="gw" name="gw" value= "<!--#netgw-->" ></div></div>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="gw">Primary DNS:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input type="text" id="dns1" name="dns1" value= "<!--#curpdns-->" ></div></div>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="gw">Secondary DNS:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input type="text" id="dns2" name="dns2" value= "<!--#cursdns-->" ></div></div>
+						<br>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4">
+						</div>
+						<div class="col-sm-12 col-md-8 input-group">
+							<input class="button secondary" value="Save Ethernet Settings" type="submit" style="background-color: #8dc63f;">
+						</div>
+					</fieldset>
+				</form>
+				<br><br>
+				
+				<h2>WiFi Info</h2>
+				<h3>WiFi will not be used when an Ethernet cable is connected.</h3>
+				<!--
+				<form method="get">
+					<div class="row responsive-label">
+						<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+							<b>WiFi SSID:</b>
+						</div>
+						<div class="col-sm-12 col-md-8 fluid"><!--#wf_ssid-- ></div>
+					</div>
+					<br>
+					<div class="row responsive-label">
+						<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+							<b>WiFi Channel:</b>
+						</div>
+						<div class="col-sm-12 col-md-8 fluid"><!--#wf_chan-- ></div>
+					</div>
+					<br>
+					<div class="row responsive-label">
+						<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+							<b>WiFi RSSI:</b>
+						</div>
+						<div class="col-sm-12 col-md-8 fluid"><!--#wf_rssi-- ></div>
+					</div>
+					<br>
+					<div class="row responsive-label">
+						<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;">
+							<b>WiFi MAC Address:</b>
+						</div>
+						<div class="col-sm-12 col-md-8 fluid"><!--#wf_maca-- ></div>
+					</div>
+					<br>
+				</form>
+				
+				<form method="post" action="/save_network_wifi.xml">
+					<fieldset>
+						<div class="row responsive-label">	
+							<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><input type="radio" name="wfdhcp" value="1" <!--#wfdhcpon-- >></div>
+							<div class="col-sm-12 col-md-8 input-group" style="align-self: left; text-align: left;"><label for="wfdhcp" style="padding-left:0;">Determine WiFi network settings automatically with DHCP</label></div> 
+						</div>
+						<br>
+						<div class="row responsive-label">
+							<div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><input type="radio" name="wfdhcp" value="0" <!--#wfdhcpoff-- >></div>
+							<div class="col-sm-12 col-md-8 input-group" style="align-self: left; text-align: left;"><label for="wfdhcp" style="padding-left:0;">Use the following WiFi network settings:</label></div>
+						</div>
+						<br>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="wfip">IP address:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input id="wfip" name="wfip" type="text" value= "<!--#wf_ip-- >" ></div></div>	
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="wfsn">Subnet:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input type="text" id="wfsn" name="wfsn" value= "<!--#wf_sn-- >" ></div></div>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="wfgw">Gateway:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input type="text" id="wfgw" name="wfgw" value= "<!--#wf_gw-- >" ></div></div>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="wfdns1">Primary DNS:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input type="text" id="wfdns1" name="wfdns1" value= "<!--#wf_pdns-- >" ></div></div>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4" style="align-self: center; text-align: left;"><label for="wfdns2">Secondary DNS:</label></div>
+						<div class="col-sm-12 col-md-8 input-group fluid" style="align-self: center;"><input type="text" id="wfdns2" name="wfdns2" value= "<!--#wf_sdns-- >" ></div></div>
+						<br>
+						<div class="row responsive-label"><div class="col-sm-12 col-md-4">
+						</div>
+						<div class="col-sm-12 col-md-8 input-group">
+							<input class="button secondary" value="Save WiFi Settings" type="submit" style="background-color: #8dc63f;">
+						</div>
+					</fieldset>
+				</form>
+				-->
+		</div></div></div>
+		</div>
+	</body>
+</html>

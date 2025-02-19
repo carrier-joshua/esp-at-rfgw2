@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>PowerShades</title>
+		<link href="https://powershades-gateway-webserver.s3-us-west-2.amazonaws.com/mini-dark.min.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div>
+		<header class="sticky" style="height:5em">
+			<div class="col-sm-4 col-md-2">
+				<a href="/index.shtml" class="logo">
+					<img src="https://powershades-gateway-webserver.s3-us-west-2.amazonaws.com/PowerShades.png"
+						alt="Powershades" />
+				</a>
+				<a href="/network.shtml" class="button" style="font-size:1.0em;">Network</a>
+				<a href="/device.shtml" class="button" style="font-size:1.0em;">Device</a>
+			</div>
+		</header>
+	</div>
+	
+	<div class="main-container container"><div class="row">
+		<div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-6">
+			<br>
+			<table style="max-height:none">
+				<h4>Debug Variables</h4>
+				<thead>
+					<tr><th>Key</th><th>Value</th></tr></thead>
+					<tbody>
+				<tr><td>fw version:</td><td id=version></td></tr>
+				<tr><td>Cur fw page:</td><td id=curfwpage></td></tr>
+				<tr><td>Watchdog Reset:</td><td id=wdog_reset></td></tr>
+				<tr><td>FreeRTOS Heap Free Bytes:</td><td id=free_bytes></td></tr>
+				
+               
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<br>
+	<br>
+	<div class="container"><div class="row">
+		<div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-6">
+			<h4>Debug Output</h4>
+			<textarea name="dbg_out" id="dbg_out" cols="100" rows="50"></textarea>
+		</div>
+	</div>
+	<br>
+	<br>
+
+	<script src="lib.js"></script>
+	<script>
+
+		refreshVariable(["version", "curfwpage"]);	// one time updates
+		refreshVariable(["wdog_reset", "free_bytes"], 5000);	// update at 5 second interval
+		refreshVariable(["dbg_out"], 1000);	// update at 1 second interval
+
+	</script>
+
+	</body>
+</html>
